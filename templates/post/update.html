@@ -4,63 +4,145 @@
 
 <div class="container d-flex justify-content-center align-items-center mt-5">
 
-    <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 100%; max-width: 600px;">
+    <div class="card shadow-lg border-0 rounded-4 p-4"
+         style="width: 100%; max-width: 700px;">
 
         <!-- Título -->
         <div class="text-center mb-4">
-            <h2 class="fw-bold text-dark">Actualizar Post</h2>
+
+            <h2 class="fw-bold text-dark">
+                Actualizar Estudiante
+            </h2>
 
             <p class="text-muted mb-0">
-                Modifica la información del post
+                Modifica la información del estudiante
             </p>
+
         </div>
 
         <!-- Formulario -->
-        <form action="/post/update/{{ single_post['id'] }}" method="post">
+        <form
+            action="{{ url_for('update_student', student_id=student['id']) }}"
+            method="POST"
+        >
 
-            <!-- Título -->
-            <div class="mb-4">
+            <!-- DNI -->
+            <div class="mb-3">
 
-                <label for="title" class="form-label fw-semibold">
-                    Título
+                <label for="dni" class="form-label fw-semibold">
+                    DNI
                 </label>
 
-                <input 
+                <input
                     type="text"
                     class="form-control form-control-lg rounded-3"
-                    name="title_title"
-                    id="title"
-                    value="{{ single_post['title'] }}"
+                    name="dni"
+                    id="dni"
+                    value="{{ student['dni'] }}"
                     required
                 >
 
             </div>
 
-            <!-- Contenido -->
-            <div class="mb-4">
+            <!-- Nombre -->
+            <div class="mb-3">
 
-                <label for="content" class="form-label fw-semibold">
-                    Contenido
+                <label for="name" class="form-label fw-semibold">
+                    Nombre
                 </label>
 
-                <textarea
-                    class="form-control rounded-3"
-                    name="content_content"
-                    id="content"
-                    rows="5"
+                <input
+                    type="text"
+                    class="form-control form-control-lg rounded-3"
+                    name="name"
+                    id="name"
+                    value="{{ student['name'] }}"
                     required
-                >{{ single_post['content'] }}</textarea>
+                >
+
+            </div>
+
+            <!-- Edad -->
+            <div class="mb-3">
+
+                <label for="age" class="form-label fw-semibold">
+                    Edad
+                </label>
+
+                <input
+                    type="number"
+                    class="form-control form-control-lg rounded-3"
+                    name="age"
+                    id="age"
+                    value="{{ student['age'] }}"
+                    required
+                >
+
+            </div>
+
+            <!-- Nota -->
+            <div class="mb-3">
+
+                <label for="grade" class="form-label fw-semibold">
+                    Nota
+                </label>
+
+                <input
+                    type="number"
+                    step="0.1"
+                    class="form-control form-control-lg rounded-3"
+                    name="grade"
+                    id="grade"
+                    value="{{ student['grade'] }}"
+                    required
+                >
+
+            </div>
+
+            <!-- Aprobado -->
+            <div class="mb-4">
+
+                <label for="is_approved" class="form-label fw-semibold">
+                    ¿Aprobado?
+                </label>
+
+                <select
+                    class="form-select form-select-lg rounded-3"
+                    name="is_approved"
+                    id="is_approved"
+                    required
+                >
+
+                    <option
+                        value="1"
+                        {% if student['is_approved'] %}
+                            selected
+                        {% endif %}
+                    >
+                        Sí
+                    </option>
+
+                    <option
+                        value="0"
+                        {% if not student['is_approved'] %}
+                            selected
+                        {% endif %}
+                    >
+                        No
+                    </option>
+
+                </select>
 
             </div>
 
             <!-- Botón -->
             <div class="d-grid">
 
-                <button 
+                <button
                     type="submit"
                     class="btn btn-primary btn-lg rounded-3 fw-bold"
                 >
-                    Actualizar Post
+                    Actualizar Estudiante
                 </button>
 
             </div>

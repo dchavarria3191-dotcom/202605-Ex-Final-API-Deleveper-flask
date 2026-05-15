@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+
+    <div class="card shadow-lg border-0 rounded-4 p-4"
+         style="width: 100%; max-width: 600px;">
+
+        <!-- Título -->
+        <div class="text-center mb-4">
+
+            <h2 class="fw-bold text-danger">
+                Eliminar Estudiante
+            </h2>
+
+            <p class="text-muted mb-0">
+                Confirma la eliminación del estudiante
+            </p>
+
+        </div>
+
+        <!-- Información -->
+        <div class="mb-4">
+
+            <p>
+                <strong>ID:</strong>
+                {{ student['id'] }}
+            </p>
+
+            <p>
+                <strong>DNI:</strong>
+                {{ student['dni'] }}
+            </p>
+
+            <p>
+                <strong>Nombre:</strong>
+                {{ student['name'] }}
+            </p>
+
+            <p>
+                <strong>Edad:</strong>
+                {{ student['age'] }}
+            </p>
+
+            <p>
+                <strong>Nota:</strong>
+                {{ student['grade'] }}
+            </p>
+
+        </div>
+
+        <!-- Formulario -->
+        <form
+            action="{{ url_for('delete_student', student_id=student['id']) }}"
+            method="POST"
+        >
+
+            <div class="d-flex gap-2">
+
+                <!-- Cancelar -->
+                <a
+                    href="{{ url_for('get_single_student', student_id=student['id']) }}"
+                    class="btn btn-dark btn-lg w-100"
+                >
+                    Cancelar
+                </a>
+
+                <!-- Eliminar -->
+                <button
+                    type="submit"
+                    class="btn btn-danger btn-lg fw-bold w-100"
+                    onclick="return confirm('¿Seguro que deseas eliminar este estudiante?')"
+                >
+                    Eliminar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

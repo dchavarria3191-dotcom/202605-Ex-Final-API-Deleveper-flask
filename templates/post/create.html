@@ -4,59 +4,138 @@
 
 <div class="container d-flex justify-content-center align-items-center mt-5">
 
-    <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 100%; max-width: 600px;">
+    <div class="card shadow-lg border-0 rounded-4 p-4"
+         style="width: 100%; max-width: 700px;">
 
         <!-- Título -->
         <div class="text-center mb-4">
-            <h2 class="fw-bold text-dark">Crear Nuevo Post</h2>
+
+            <h2 class="fw-bold text-dark">
+                Crear Nuevo Estudiante
+            </h2>
+
             <p class="text-muted mb-0">
-                Completa la información del post
+                Completa la información del estudiante
             </p>
+
         </div>
 
         <!-- Formulario -->
-        <form action="/post/create" method="post">
+        <form action="/students/create" method="POST">
 
-            <!-- Título -->
-            <div class="mb-4">
-                <label for="title" class="form-label fw-semibold">
-                    Título
+            <!-- DNI -->
+            <div class="mb-3">
+
+                <label for="dni" class="form-label fw-semibold">
+                    DNI
                 </label>
 
-                <input 
+                <input
                     type="text"
                     class="form-control form-control-lg rounded-3"
-                    name="title_title"
-                    id="title"
-                    placeholder="Ingresa el título"
+                    name="dni"
+                    id="dni"
+                    placeholder="Ingresa el DNI"
                     required
                 >
+
             </div>
 
-            <!-- Contenido -->
-            <div class="mb-4">
-                <label for="content" class="form-label fw-semibold">
-                    Contenido
+            <!-- Nombre -->
+            <div class="mb-3">
+
+                <label for="name" class="form-label fw-semibold">
+                    Nombre
                 </label>
 
-                <textarea
-                    class="form-control rounded-3"
-                    name="content_content"
-                    id="content"
-                    rows="5"
-                    placeholder="Escribe el contenido del post"
+                <input
+                    type="text"
+                    class="form-control form-control-lg rounded-3"
+                    name="name"
+                    id="name"
+                    placeholder="Ingresa el nombre"
                     required
-                ></textarea>
+                >
+
+            </div>
+
+            <!-- Edad -->
+            <div class="mb-3">
+
+                <label for="age" class="form-label fw-semibold">
+                    Edad
+                </label>
+
+                <input
+                    type="number"
+                    class="form-control form-control-lg rounded-3"
+                    name="age"
+                    id="age"
+                    placeholder="Ingresa la edad"
+                    required
+                >
+
+            </div>
+
+            <!-- Nota -->
+            <div class="mb-3">
+
+                <label for="grade" class="form-label fw-semibold">
+                    Nota
+                </label>
+
+                <input
+                    type="number"
+                    step="0.1"
+                    class="form-control form-control-lg rounded-3"
+                    name="grade"
+                    id="grade"
+                    placeholder="Ingresa la nota"
+                    required
+                >
+
+            </div>
+
+            <!-- Aprobado -->
+            <div class="mb-4">
+
+                <label for="is_approved" class="form-label fw-semibold">
+                    ¿Aprobado?
+                </label>
+
+                <select
+                    class="form-select form-select-lg rounded-3"
+                    name="is_approved"
+                    id="is_approved"
+                    required
+                >
+
+                    <option value="">
+                        Selecciona una opción
+                    </option>
+
+                    <option value="1">
+                        Sí
+                    </option>
+
+                    <option value="0">
+                        No
+                    </option>
+
+                </select>
+
             </div>
 
             <!-- Botón -->
             <div class="d-grid">
-                <button 
+
+                <button
                     type="submit"
                     class="btn btn-primary btn-lg rounded-3 fw-bold"
                 >
-                    Publicar Post
+                    Guardar Estudiante
                 </button>
+
             </div>
 
         </form>

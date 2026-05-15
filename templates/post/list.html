@@ -1,40 +1,124 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container mt-5">
+
     <div class="card shadow-lg border-0 rounded-4">
+
+        <!-- Header -->
         <div class="card-header bg-dark text-white rounded-top-4 py-3">
-            <h2 class="mb-0 text-center">Listado de Posts</h2>
+            <h2 class="mb-0 text-center">
+                Listado de Estudiantes
+            </h2>
         </div>
 
-        <div class="card-body">|
+        <!-- Body -->
+        <div class="card-body">
+
             <div class="table-responsive">
+
                 <table class="table table-hover align-middle text-center">
+
+                    <!-- Encabezados -->
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Fecha de Creación</th>
-                            <th>Título</th>
-                            <th>Contenido</th>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Nota</th>
+                            <th>Aprobado</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
                         </tr>
                     </thead>
+
+                    <!-- Datos -->
                     <tbody>
-                        {% for post in post_list %}
+
+                        {% for student in student_list %}
+
                         <tr>
-                            <td><a href="{{ url_for('get_single_posts', post_id=post['id']) }}">{{ post['id'] }}</a></td>
-                            <td>{{ post['create_at'] }}</td>
+
+                            <!-- ID -->
+                            <td>
+                                <a href="{{ url_for('get_single_student', student_id=student['id']) }}">
+                                    {{ student['id'] }}
+                                </a>
+                            </td>
+
+                            <!-- DNI -->
+                            <td>
+                                {{ student['dni'] }}
+                            </td>
+
+                            <!-- Nombre -->
                             <td>
                                 <span class="fw-bold text-primary">
-                                    {{ post['title'] }}
+                                    {{ student['name'] }}
                                 </span>
                             </td>
-                            <td>{{ post['content'] }}</td>
+
+                            <!-- Edad -->
+                            <td>
+                                {{ student['age'] }}
+                            </td>
+
+                            <!-- Nota -->
+                            <td>
+                                {{ student['grade'] }}
+                            </td>
+
+                            <!-- Aprobado -->
+                            <td>
+
+                                {% if student['is_approved'] %}
+
+                                    <span class="badge bg-success">
+                                        Sí
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-danger">
+                                        No
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <!-- Fechas -->
+                            <td>
+                                {{ student['created_at'] }}
+                            </td>
+
+                            <td>
+                                {{ student['updated_at'] }}
+                            </td>
+
                         </tr>
+
                         {% endfor %}
+
                     </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
+
 {% endblock %}
+
+
+
+
+
+
+
