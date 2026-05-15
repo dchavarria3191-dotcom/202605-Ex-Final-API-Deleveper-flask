@@ -197,3 +197,4 @@ def delete_student(student_id):
     return redirect(
         url_for("get_all_students")
     )
+
