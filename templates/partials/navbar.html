@@ -1,52 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="container">
 
-        <!-- Logo -->
-        <a class="navbar-brand fw-bold" href="{{ url_for('home') }}">
-            Mi Flask App
+        <a
+            class="navbar-brand fw-bold"
+            href="{{ url_for('home') }}"
+        >
+            Flask HTMX
         </a>
 
-        <!-- Botón responsive -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="navbar-nav ms-auto">
 
-        <!-- Menú -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+            <a
+                class="nav-link"
+                href="{{ url_for('get_all_students') }}"
+            >
+                Listado
+            </a>
 
-            <ul class="navbar-nav ms-auto align-items-center gap-2">
-
-                <!-- Listado -->
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="{{ url_for('get_all_students') }}"
-                    >
-                        Listado
-                    </a>
-
-                </li>
-
-                <!-- Crear estudiante -->
-                <li class="nav-item">
-
-                    <a
-                        class="btn btn-primary px-3 rounded-3"
-                        href="{{ url_for('create_student') }}"
-                    >
-                        + Crear Estudiante
-                    </a>
-
-                </li>
-
-            </ul>
+            <a
+                class="btn btn-primary ms-2"
+                href="{{ url_for('create_student') }}"
+            >
+                Crear
+            </a>
 
         </div>
 

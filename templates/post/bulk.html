@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow-lg border-0 rounded-4">
+
+    <!-- Header -->
+    <div class="card-header bg-dark text-white">
+        <h2 class="mb-0">
+            Carga Masiva de Estudiantes
+        </h2>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+        <!-- Descripción -->
+        <div class="alert alert-info">
+
+            <strong>Formato esperado:</strong>
+
+            <pre class="mb-0 mt-2">
+[
+    {
+        "dni": "74125896",
+        "name": "Carlos Torres",
+        "age": 20,
+        "grade": 18.5,
+        "is_approved": true
+    }
+]
+            </pre>
+
+        </div>
+
+        <!-- Formulario -->
+        <form id="bulkForm">
+
+            <!-- Archivo JSON -->
+            <div class="mb-4">
+
+                <label
+                    for="jsonFile"
+                    class="form-label fw-bold"
+                >
+                    Seleccionar archivo JSON
+                </label>
+
+                <input
+                    type="file"
+                    id="jsonFile"
+                    class="form-control"
+                    accept=".json"
+                    required
+                >
+
+            </div>
+
+            <!-- Botón -->
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="uploadJsonFile()"
+            >
+                Registrar estudiantes
+            </button>
+
+        </form>
+
+        <!-- Resultado -->
+        <div id="bulk-result" class="mt-4"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function uploadJsonFile() {
+
+    const fileInput = document.getElementById("jsonFile");
+
+    const file = fileInput.files[0];
+
+    if (!file) {
+
+        document.getElementById("bulk-result").innerHTML = `
+            <div class="alert alert-danger">
+                Debes seleccionar un archivo JSON
+            </div>
+        `;
+
+        return;
+    }
+
+    try {
+
+        // Leer archivo
+        const text = await file.text();
+
+        // Convertir JSON
+        const data = JSON.parse(text);
+
+        // Enviar al endpoint
+        const response = await fetch("/students/bulk", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+        const result = await response.json();
+
+        // Mostrar resultado
+        document.getElementById("bulk-result").innerHTML = `
+            <div class="alert alert-success">
+                ${result.message}
+            </div>
+        `;
+
+    } catch(error) {
+
+        document.getElementById("bulk-result").innerHTML = `
+            <div class="alert alert-danger">
+                Archivo JSON inválido
+            </div>
+        `;
+    }
+
+}
+
+</script>
+
+{% endblock %}

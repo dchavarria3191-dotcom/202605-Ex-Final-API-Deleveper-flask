@@ -2,111 +2,50 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="card shadow-lg border-0 rounded-4">
 
-    <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-dark text-white">
+        <h2 class="mb-0">
+            Listado de Estudiantes
+        </h2>
+    </div>
 
-        <!-- Header -->
-        <div class="card-header bg-dark text-white rounded-top-4 py-3">
-            <h2 class="mb-0 text-center">
-                Listado de Estudiantes
-            </h2>
+    <div class="card-body">
+
+        <div class="d-flex gap-2 mb-3">
+
+            <button
+                class="btn btn-outline-primary"
+                hx-get="/students/table"
+                hx-target="#students-container"
+                hx-swap="innerHTML"
+            >
+                Refrescar Tabla HTMX
+            </button>
+
+            <button
+                class="btn btn-outline-success"
+                hx-get="/students/average"
+                hx-target="#average-container"
+                hx-swap="innerHTML"
+            >
+                Ver Promedio
+            </button>
+
+            <a
+                href="/students/bulk"
+                class="btn btn-dark"
+            >
+                Bulk Insert
+            </a>
+
         </div>
 
-        <!-- Body -->
-        <div class="card-body">
+        <div id="average-container"></div>
 
-            <div class="table-responsive">
+        <div id="students-container">
 
-                <table class="table table-hover align-middle text-center">
-
-                    <!-- Encabezados -->
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>DNI</th>
-                            <th>Nombre</th>
-                            <th>Edad</th>
-                            <th>Nota</th>
-                            <th>Aprobado</th>
-                            <th>Creado</th>
-                            <th>Actualizado</th>
-                        </tr>
-                    </thead>
-
-                    <!-- Datos -->
-                    <tbody>
-
-                        {% for student in student_list %}
-
-                        <tr>
-
-                            <!-- ID -->
-                            <td>
-                                <a href="{{ url_for('get_single_student', student_id=student['id']) }}">
-                                    {{ student['id'] }}
-                                </a>
-                            </td>
-
-                            <!-- DNI -->
-                            <td>
-                                {{ student['dni'] }}
-                            </td>
-
-                            <!-- Nombre -->
-                            <td>
-                                <span class="fw-bold text-primary">
-                                    {{ student['name'] }}
-                                </span>
-                            </td>
-
-                            <!-- Edad -->
-                            <td>
-                                {{ student['age'] }}
-                            </td>
-
-                            <!-- Nota -->
-                            <td>
-                                {{ student['grade'] }}
-                            </td>
-
-                            <!-- Aprobado -->
-                            <td>
-
-                                {% if student['is_approved'] %}
-
-                                    <span class="badge bg-success">
-                                        Sí
-                                    </span>
-
-                                {% else %}
-
-                                    <span class="badge bg-danger">
-                                        No
-                                    </span>
-
-                                {% endif %}
-
-                            </td>
-
-                            <!-- Fechas -->
-                            <td>
-                                {{ student['created_at'] }}
-                            </td>
-
-                            <td>
-                                {{ student['updated_at'] }}
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
+            {% include 'partials/students_table.html' %}
 
         </div>
 
@@ -115,10 +54,3 @@
 </div>
 
 {% endblock %}
-
-
-
-
-
-
-
